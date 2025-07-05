@@ -53,5 +53,5 @@ STM32 Nucleo-L476RG
 STM32 HAL I2C Documentation  
 Shawn Hymel Youtube: https://www.youtube.com/watch?v=isOekyygpR8&t=105s
 
-🧑‍💻 Author
+🧑‍💻 Author  
 Kevin Yan
