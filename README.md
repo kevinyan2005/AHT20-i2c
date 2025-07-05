@@ -1,5 +1,7 @@
 🌡️AHT20 Sensor Interface with STM32 Nucleo-L476
+
 This project demonstrates how to interface the AHT20 temperature and humidity sensor with an STM32 Nucleo-L476RG development board using the I2C protocol. The project is built using STM32CubeIDE and HAL libraries.
+
 
 📦 Features
 - Read temperature and humidity data from the AHT20 sensor
