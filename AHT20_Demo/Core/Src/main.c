@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 
 /* USER CODE END Includes */
 
@@ -70,6 +71,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	uint8_t buf[50];
 
   /* USER CODE END 1 */
 
@@ -101,6 +103,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  strcpy((char*)buf, "Hello!\r\n");
+	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  HAL_Delay(2000);
+	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
