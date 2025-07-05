@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include "aht20.h"
 
 /* USER CODE END Includes */
 
@@ -71,7 +72,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	uint8_t buf[50];
+	//uint8_t buf[50];
+	float temperature, humidity;
+	char buffer[100];
 
   /* USER CODE END 1 */
 
@@ -97,14 +100,41 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
+  printf("Initializing AHT20 sensor...\r\n");
+  // Initialize the sensor
+  if (AHT20_Init() != HAL_OK)
+  {
+	  printf("AHT20 initialization failed!\r\n");
+	  return 0;
+  }
+  printf("AHT20 initialized successfully!\r\n");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  strcpy((char*)buf, "Hello!\r\n");
-	  HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+	  //strcpy((char*)buf, "Hello!\r\n");
+	  //HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
+
+	  if (AHT20_ReadData(&temperature, &humidity) == HAL_OK)
+	  {
+		  // Format and print the results
+		  //sprintf(buffer, "Temperature: %.2f°C, Humidity: %.2f%%RH\r\n", temperature, humidity);
+		  //printf("%s", buffer);
+
+		  sprintf(buffer, "TEMP:%.2f C, HUM:%.2f %% rH\r\n", temperature, humidity);
+
+	  }
+	  else
+	  {
+		  //printf("Failed to read AHT20 data!\r\n");
+		  sprintf(buffer, "Failed to read AHT20 data!\r\n");
+	  }
+
+	  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+
 	  HAL_Delay(2000);
 	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
     /* USER CODE END WHILE */
