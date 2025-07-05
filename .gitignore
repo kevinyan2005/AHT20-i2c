@@ -1,52 +1,65 @@
-# Prerequisites
-*.d
+# STM32CubeIDE build output folders
+Debug/
+Release/
 
-# Object files
+# STM32CubeIDE/Eclipse settings (user-specific)
+.settings/
+.metadata/
+.externalToolBuilders/
+
+# Build artifacts and temporary files
 *.o
-*.ko
-*.obj
+*.d
 *.elf
-
-# Linker output
-*.ilk
+*.bin
+*.hex
 *.map
-*.exp
+*.list
+*.log
+*.tmp
+*.bak
+*.su
 
-# Precompiled Headers
-*.gch
-*.pch
+# Launch/debug configurations (often user-specific)
+*.launch
 
-# Libraries
-*.lib
+# CubeIDE project metadata (optional, often regenerated)
+.mxproject
+
+# IDE-specific folders (optional)
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Libraries and executables
 *.a
-*.la
-*.lo
-
-# Shared objects (inc. Windows DLLs)
-*.dll
+*.lib
 *.so
-*.so.*
-*.dylib
-
-# Executables
+*.dll
 *.exe
 *.out
 *.app
-*.i*86
-*.x86_64
-*.hex
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+# Precompiled headers
+*.gch
+*.pch
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+# Backup and swap files
+*~
+*.swp
+
+# cscope and tags
+cscope.*
+tags
+
+# Miscellaneous
+*.suo
+*.user
+*.ncb
+*.sdf
+*.sln
+*.VC.db
+*.VC.opendb
