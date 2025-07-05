@@ -2,10 +2,10 @@
 This project demonstrates how to interface the AHT20 temperature and humidity sensor with an STM32 Nucleo-L476RG development board using the I2C protocol. The project is built using STM32CubeIDE and HAL libraries.
 
 📦 Features
-Read temperature and humidity data from the AHT20 sensor
-Communicate via I2C using STM32 HAL drivers
-Display sensor data via UART (e.g., to a serial terminal)
-Modular and easy-to-understand code structure
+- Read temperature and humidity data from the AHT20 sensor
+- Communicate via I2C using STM32 HAL drivers
+- Display sensor data via UART (e.g., to a serial terminal)
+- Modular and easy-to-understand code structure
 
 🛠️ Hardware Requirements
 STM32 Nucleo-L476RG board
