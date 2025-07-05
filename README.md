@@ -8,23 +8,24 @@ This project demonstrates how to interface the AHT20 temperature and humidity se
 - Modular and easy-to-understand code structure
 
 🛠️ Hardware Requirements
-STM32 Nucleo-L476RG board
-AHT20 sensor module (I2C interface)
-Jumper wires
-USB cable for programming and UART communication
+- STM32 Nucleo-L476RG board
+- AHT20 sensor module (I2C interface)
+- Jumper wires
+- USB cable for programming and UART communication
 
 🔌 Wiring
-AHT20 Pin	STM32 Pin (Nucleo-L476RG)
-VCC	3.3V
-GND	GND
-SDA	PB9 (I2C1_SDA)
-SCL	PB8 (I2C1_SCL)
+- AHT20 Pin	STM32 Pin (Nucleo-L476RG)
+- VCC	3.3V
+- GND	GND
+- SDA	PB9 (I2C1_SDA)
+- SCL	PB8 (I2C1_SCL)
 You can configure other I2C pins as needed in STM32CubeMX.
 
 🧰 Software Requirements
-STM32CubeIDE
-STM32 HAL drivers
-Serial terminal (e.g., PuTTY, Tera Term)
+- STM32CubeIDE
+- STM32 HAL drivers
+- Serial terminal (e.g., PuTTY, Tera Term)
+
 📁 Project Structure
 AHT20_STM32/
 ├── Core/
