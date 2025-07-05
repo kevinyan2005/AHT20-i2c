@@ -31,7 +31,7 @@ You can configure other I2C pins as needed in STM32CubeMX.
 AHT20_STM32/  
 ├── Core/  
 │   ├── Inc/  
-│   │   └── aht20.h  
+│   │      └── aht20.h  
 │   └── Src/  
 │       └── aht20.c  
 ├── Drivers/  
