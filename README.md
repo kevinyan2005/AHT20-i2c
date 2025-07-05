@@ -48,8 +48,8 @@ Print the results to a serial terminal via UART.
 Temperature: 24.56 C, Humidity: 48.23 %RH  
 
 📚 References  
-AHT20 Datasheet
-STM32 Nucleo-L476RG
+AHT20 Datasheet  
+STM32 Nucleo-L476RG  
 STM32 HAL I2C Documentation  
 Shawn Hymel Youtube: https://www.youtube.com/watch?v=isOekyygpR8&t=105s
 
