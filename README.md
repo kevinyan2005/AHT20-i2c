@@ -31,14 +31,14 @@ You can configure other I2C pins as needed in STM32CubeMX.
 AHT20_STM32/  
 ├── Core/  
 │   ├── Inc/  
-│   │      └── aht20.h  
+│   │   └── aht20.h  
 │   └── Src/  
-│          └── aht20.c  
+│       └── aht20.c  
 ├── Drivers/  
 ├── .ioc (STM32CubeMX config)  
-└── README.md  
+└── README.md    
 
-📋 How It Works
+📋 How It Works  
 Initialize I2C and UART peripherals using STM32CubeMX.
 Use HAL I2C functions to communicate with the AHT20 sensor.
 Read raw data, convert it to temperature (°C) and humidity (%RH).
