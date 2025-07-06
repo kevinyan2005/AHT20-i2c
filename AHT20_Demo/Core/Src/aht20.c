@@ -70,6 +70,28 @@ HAL_StatusTypeDef AHT20_ReadData(float *temperature, float *humidity)
     return HAL_OK;
 }
 
+HAL_StatusTypeDef AHT20_ReadStatus(bool *is_calibrated, bool *is_busy, uint8_t *status)
+{
+
+	// Validate input parameter
+	if (status == NULL)
+	{
+		return HAL_ERROR;
+	}
+
+
+	// Read 1 byte from AHT20 sensor
+	// The AHT20 returns its status register when we perform a simple I2C read
+	if (HAL_I2C_Master_Receive(&hi2c1, AHT20_I2C_ADDR, status, 1, AHT20_I2C_TIMEOUT) != HAL_OK)
+	{
+		return HAL_ERROR;
+	}
+
+	*is_calibrated = ((*status) & AHT20_STATUS_CAL_MASK) != 0;
+	*is_busy = ((*status) & AHT20_STATUS_BUSY_MASK) != 0;
+	return HAL_OK;
+}
+
 /*void AHT20_Demo(void)
 {
     float temperature, humidity;

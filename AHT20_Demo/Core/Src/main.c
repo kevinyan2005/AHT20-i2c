@@ -75,6 +75,8 @@ int main(void)
 	//uint8_t buf[50];
 	float temperature, humidity;
 	char buffer[100];
+	bool is_busy, is_calibrated;
+	uint8_t status;
 
   /* USER CODE END 1 */
 
@@ -100,14 +102,38 @@ int main(void)
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
 
-  printf("Initializing AHT20 sensor...\r\n");
+  //printf("Initializing AHT20 sensor...\r\n");
+  sprintf(buffer, "Initializing AHT20 sensor...\r\n");
+  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
   // Initialize the sensor
   if (AHT20_Init() != HAL_OK)
   {
-	  printf("AHT20 initialization failed!\r\n");
+	  //printf("AHT20 initialization failed!\r\n");
+	  sprintf(buffer, "AHT20 initialization failed!\r\n");
+	  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
 	  return 0;
   }
-  printf("AHT20 initialized successfully!\r\n");
+
+  if (AHT20_ReadStatus(&is_calibrated, &is_busy, &status) != HAL_OK)
+  {
+	  sprintf(buffer, "Failed to read AHT20 status!\r\n");
+  }
+  else
+  {
+	  sprintf(buffer, "Status(hex): %02X \r\n", status);
+  }
+  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+
+  if (!is_calibrated)
+  {
+	  sprintf(buffer, "Sensor not calibrated!\r\n");
+	  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+  }
+
+  //printf("AHT20 initialized successfully!\r\n");
+  sprintf(buffer, "AHT20 initialized successfully!\r\n");
+  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+
 
   /* USER CODE END 2 */
 
@@ -118,21 +144,30 @@ int main(void)
 	  //strcpy((char*)buf, "Hello!\r\n");
 	  //HAL_UART_Transmit(&huart2, buf, strlen((char*)buf), HAL_MAX_DELAY);
 
+	  if (AHT20_ReadStatus(&is_calibrated, &is_busy, &status) != HAL_OK)
+	  {
+		  sprintf(buffer, "Failed to read AHT20 status!\r\n");
+		  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+	  }
+
+	  if (is_busy)
+	  {
+		  sprintf(buffer, "Sensor is busy\r\n");
+		  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
+	  }
+
 	  if (AHT20_ReadData(&temperature, &humidity) == HAL_OK)
 	  {
 		  // Format and print the results
 		  //sprintf(buffer, "Temperature: %.2f°C, Humidity: %.2f%%RH\r\n", temperature, humidity);
 		  //printf("%s", buffer);
-
 		  sprintf(buffer, "TEMP:%.2f C, HUM:%.2f %% rH\r\n", temperature, humidity);
-
 	  }
 	  else
 	  {
 		  //printf("Failed to read AHT20 data!\r\n");
 		  sprintf(buffer, "Failed to read AHT20 data!\r\n");
 	  }
-
 	  HAL_UART_Transmit(&huart2, (const uint8_t*)buffer, strlen((char*)buffer), HAL_MAX_DELAY);
 
 	  HAL_Delay(2000);

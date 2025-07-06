@@ -29,12 +29,18 @@
 #include "main.h"
 #include <stdio.h>
 //#include <string.h>
+#include <stdbool.h>
 
 
 #define AHT20_I2C_ADDR       (0x38 << 1)  // 7-bit address shifted for HAL (0x70)
 #define AHT20_CMD_INIT       0xBE          // Initialization command
 #define AHT20_CMD_MEASURE    0xAC          // Trigger measurement command
 #define AHT20_CMD_SOFT_RESET 0xBA          // Soft reset command
+
+#define AHT20_STATUS_BUSY_MASK 0x80
+#define AHT20_STATUS_CAL_MASK 0x08
+
+#define AHT20_I2C_TIMEOUT 1000
 
 /* External Hardware Handles */
 /* These must be defined and initialized in main.c */
@@ -43,6 +49,7 @@ extern I2C_HandleTypeDef hi2c1;   // I2C handle for AHT20 communication
 HAL_StatusTypeDef AHT20_Init(void);
 HAL_StatusTypeDef AHT20_ReadData(float *temperature, float *humidity);
 void AHT20_SoftReset(void);
+HAL_StatusTypeDef AHT20_ReadStatus(bool *is_calibrated, bool *is_busy, uint8_t *raw_status);
 void AHT20_Demo(void);
 
 #endif /* INC_AHT20_H_ */
